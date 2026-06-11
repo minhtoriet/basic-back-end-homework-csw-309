@@ -1,4 +1,4 @@
-namespace wanabe_banking_system
+namespace WebApplication1
 {
     public class WeatherForecast
     {

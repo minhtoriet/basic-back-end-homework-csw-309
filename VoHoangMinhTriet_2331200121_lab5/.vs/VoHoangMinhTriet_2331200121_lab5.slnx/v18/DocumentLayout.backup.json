@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "F:\\homework\\basic-back-end-homework-csw-306\\VoHoangMinhTriet_2331200121_lab5\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B13BFE79-FD42-CE3A-BC4D-421770132899}|VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5.csproj|f:\\homework\\basic-back-end-homework-csw-306\\vohoangminhtriet_2331200121_lab5\\vohoangminhtriet_2331200121_lab5\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B13BFE79-FD42-CE3A-BC4D-421770132899}|VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5.csproj|solutionrelative:vohoangminhtriet_2331200121_lab5\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B13BFE79-FD42-CE3A-BC4D-421770132899}|VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5.csproj|f:\\homework\\basic-back-end-homework-csw-306\\vohoangminhtriet_2331200121_lab5\\vohoangminhtriet_2331200121_lab5\\controllers\\carouselcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B13BFE79-FD42-CE3A-BC4D-421770132899}|VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5.csproj|solutionrelative:vohoangminhtriet_2331200121_lab5\\controllers\\carouselcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B13BFE79-FD42-CE3A-BC4D-421770132899}|VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5.csproj|f:\\homework\\basic-back-end-homework-csw-306\\vohoangminhtriet_2331200121_lab5\\vohoangminhtriet_2331200121_lab5\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B13BFE79-FD42-CE3A-BC4D-421770132899}|VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5.csproj|solutionrelative:vohoangminhtriet_2331200121_lab5\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B13BFE79-FD42-CE3A-BC4D-421770132899}|VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5.csproj|f:\\homework\\basic-back-end-homework-csw-306\\vohoangminhtriet_2331200121_lab5\\vohoangminhtriet_2331200121_lab5\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B13BFE79-FD42-CE3A-BC4D-421770132899}|VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5.csproj|solutionrelative:vohoangminhtriet_2331200121_lab5\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B13BFE79-FD42-CE3A-BC4D-421770132899}|VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5.csproj|f:\\homework\\basic-back-end-homework-csw-306\\vohoangminhtriet_2331200121_lab5\\vohoangminhtriet_2331200121_lab5\\models\\context\\librarymanagementcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B13BFE79-FD42-CE3A-BC4D-421770132899}|VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5.csproj|solutionrelative:vohoangminhtriet_2331200121_lab5\\models\\context\\librarymanagementcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B13BFE79-FD42-CE3A-BC4D-421770132899}|VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5.csproj|f:\\homework\\basic-back-end-homework-csw-306\\vohoangminhtriet_2331200121_lab5\\vohoangminhtriet_2331200121_lab5\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B13BFE79-FD42-CE3A-BC4D-421770132899}|VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5.csproj|solutionrelative:vohoangminhtriet_2331200121_lab5\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B13BFE79-FD42-CE3A-BC4D-421770132899}|VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5.csproj|f:\\homework\\basic-back-end-homework-csw-306\\vohoangminhtriet_2331200121_lab5\\vohoangminhtriet_2331200121_lab5\\controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -32,14 +44,53 @@
               "RelativeDocumentMoniker": "VoHoangMinhTriet_2331200121_lab5\\Program.cs",
               "ToolTip": "F:\\homework\\basic-back-end-homework-csw-306\\VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5\\Program.cs",
               "RelativeToolTip": "VoHoangMinhTriet_2331200121_lab5\\Program.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAADYAAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-30T13:03:29.519Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "CarouselController.cs",
+              "DocumentMoniker": "F:\\homework\\basic-back-end-homework-csw-306\\VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5\\Controllers\\CarouselController.cs",
+              "RelativeDocumentMoniker": "VoHoangMinhTriet_2331200121_lab5\\Controllers\\CarouselController.cs",
+              "ToolTip": "F:\\homework\\basic-back-end-homework-csw-306\\VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5\\Controllers\\CarouselController.cs*",
+              "RelativeToolTip": "VoHoangMinhTriet_2331200121_lab5\\Controllers\\CarouselController.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-03T14:35:02.674Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "F:\\homework\\basic-back-end-homework-csw-306\\VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5\\appsettings.json",
+              "RelativeDocumentMoniker": "VoHoangMinhTriet_2331200121_lab5\\appsettings.json",
+              "ToolTip": "F:\\homework\\basic-back-end-homework-csw-306\\VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5\\appsettings.json",
+              "RelativeToolTip": "VoHoangMinhTriet_2331200121_lab5\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-02T16:17:22.975Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LibraryManagementContext.cs",
+              "DocumentMoniker": "F:\\homework\\basic-back-end-homework-csw-306\\VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5\\Models\\Context\\LibraryManagementContext.cs",
+              "RelativeDocumentMoniker": "VoHoangMinhTriet_2331200121_lab5\\Models\\Context\\LibraryManagementContext.cs",
+              "ToolTip": "F:\\homework\\basic-back-end-homework-csw-306\\VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5\\Models\\Context\\LibraryManagementContext.cs",
+              "RelativeToolTip": "VoHoangMinhTriet_2331200121_lab5\\Models\\Context\\LibraryManagementContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-02T16:17:14.347Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "AuthController.cs",
               "DocumentMoniker": "F:\\homework\\basic-back-end-homework-csw-306\\VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "VoHoangMinhTriet_2331200121_lab5\\Controllers\\AuthController.cs",
@@ -47,18 +98,17 @@
               "RelativeToolTip": "VoHoangMinhTriet_2331200121_lab5\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAxwB8AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-30T15:44:43.672Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-30T15:44:43.672Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "BookController.cs",
               "DocumentMoniker": "F:\\homework\\basic-back-end-homework-csw-306\\VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5\\Controllers\\BookController.cs",
               "RelativeDocumentMoniker": "VoHoangMinhTriet_2331200121_lab5\\Controllers\\BookController.cs",
               "ToolTip": "F:\\homework\\basic-back-end-homework-csw-306\\VoHoangMinhTriet_2331200121_lab5\\VoHoangMinhTriet_2331200121_lab5\\Controllers\\BookController.cs",
               "RelativeToolTip": "VoHoangMinhTriet_2331200121_lab5\\Controllers\\BookController.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAIwEcAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAADkAAAAAAAAAAAAIwEcAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-30T15:44:47.595Z"
             }

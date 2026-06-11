@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace wanabe_banking_system.Controllers
+namespace WebApplication1.Controllers
 {
     [ApiController]
     [Route("[controller]")]
