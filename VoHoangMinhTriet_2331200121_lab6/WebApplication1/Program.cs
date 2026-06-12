@@ -4,8 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using System.Text;
-using WebApplication1;
+using WebApplication1.Hub;
 using WebApplication1.Models.Context;
+using WebApplication1.Repository;
+using WebApplication1.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,9 @@ builder.Services.AddControllers();
 //builder.Services.AddOpenApi();
 
 builder.Services.AddSignalR();
+
+builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+builder.Services.AddScoped<IMessageService, MessageService>();
 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var key = jwtSettings["SecretKey"];
