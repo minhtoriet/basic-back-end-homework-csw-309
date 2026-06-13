@@ -21,6 +21,7 @@ builder.Services.AddSignalR();
 
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
 builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var key = jwtSettings["SecretKey"];
@@ -52,16 +53,6 @@ builder.Services.AddAuthentication(options => {
                 context.Token = accessToken;
             }
             return Task.CompletedTask;
-        },
-        OnAuthenticationFailed = context =>
-        {
-            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-            return Task.CompletedTask;
-        },
-        OnChallenge = context =>
-        {
-            context.Response.StatusCode = StatusCodes.Status403Forbidden;
-            return Task.CompletedTask;
         }
     };
 });
@@ -92,9 +83,11 @@ builder.Services.AddDbContext<ChatDBContext>
 
 var app = builder.Build();
 
-
 app.UseSwagger();
 app.UseSwaggerUI();
+
+
+
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
@@ -102,16 +95,17 @@ app.UseSwaggerUI();
 //}
 
 app.UseHttpsRedirection();
-
-app.UseHttpsRedirection();
-
+app.UseStaticFiles(); //html/js views 
+app.UseWebSockets();
+app.UseRouting(); //routing matchers
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseRouting();
-app.MapHub<ChatHub>("/chatHub");
-app.UseStaticFiles();
-app.MapGet("/", () => "ChatHub");
+app.MapHub<ChatHub>("/chathub"); //map the hub after auth/route
+
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
 app.Run();

@@ -9,7 +9,7 @@ namespace WebApplication1.Models
         public ICollection<Message> Messages { get; set; } = new List<Message>();
         public int Id { get; set; }
         public string Name { get; set; }
-        public string HashPassword { get; set; }
+        public string HashedPassword { get; set; }
         public string Email { get; set; }
         public bool IsActive { get; set; }
     }

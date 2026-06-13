@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Private Chat";
+}
+
+<script>
+    if (!localStorage.getItem("jwtToken")) { window.location.href = "/"; }
+</script>
+
+
+<div>
+    <h3>Online Users</h3>
+    <button onclick="fetchOnlineUsers()" >Refresh</button>
+</div>
+<ul id="onlineUsersList"></ul>
+<h3>Chat with: <span id="targetUserLabel">Select a user</span></h3>
+<div id="privateChatHistory"></div>
+<div>
+    <input id="privateMsgInput" placeholder="Send a private message..."disabled />
+    <button id="sendPrivateBtn" disabled>Send DM</button>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/9.0.6/signalr.min.js"></script>
+
+<script>
+    let selectedConnectionId = null;
+    const token = localStorage.getItem("jwtToken");
+    const myUsername = localStorage.getItem("userName") || "Me";
+
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl(`/chathub?access-token=${encodeURIComponent(token)}`)
+        .build();
+
+    // Listener for receiving DMs
+    connection.on("ReceivePrivateMessage", (sender, message) => {
+        const history = document.getElementById("privateChatHistory");
+        history.innerHTML += `<p>${sender}: ${message}</p>`;
+        history.scrollTop = history.scrollHeight;
+    });
+
+    connection.start()
+        .then(() => {
+            console.log("Connected to Private Chat Engine!");
+            fetchOnlineUsers(); // Initial fetch
+        })
+        .catch(err => console.error(err));
+
+    // Fetch from your new API endpoint
+    async function fetchOnlineUsers() {
+        const response = await fetch("/api/users/online");
+        if (response.ok) {
+            const users = await response.json();
+            const listUi = document.getElementById("onlineUsersList");
+            listUi.innerHTML = "";
+
+            users.forEach(user => {
+                // Skip listing ourselves in the directory
+                if (user.username === myUsername) return;
+
+                const li = document.createElement("li");
+                li.innerText = `${user.username}`;
+                
+                // Store connection details in element click execution context
+                li.addEventListener("click", () => {
+                    selectedConnectionId = user.connectionId;
+                    document.getElementById("targetUserLabel").innerText = user.username;
+                    
+                    // Enable inputs
+                    document.getElementById("privateMsgInput").disabled = false;
+                    document.getElementById("sendPrivateBtn").disabled = false;
+                });
+
+                listUi.appendChild(li);
+            });
+        }
+    }
+
+    // Handle Send Event Button Triggers
+    document.getElementById("sendPrivateBtn").addEventListener("click", () => {
+        const inputElement = document.getElementById("privateMsgInput");
+        const msg = inputElement.value;
+
+        if (msg && selectedConnectionId) {
+            // Invokes method signature exactly matching requirements
+            connection.invoke("SendPrivateMessage", selectedConnectionId, msg, myUsername)
+                .then(() => {
+                    inputElement.value = "";
+                })
+                .catch(err => console.error("DM Routing Failure:", err));
+        }
+    });
+</script>

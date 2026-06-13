@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register Account</h2>
+
+<input type="text" id="nameInput" placeholder="Full Name"/>
+<input type="email" id="emailInput" placeholder="Email Address"/>
+<input type="password" id="passwordInput" placeholder="Password"/>
+
+<button id="submitRegisterBtn">Register</button>
+<p>Already have an account? <a href="/login">Login here</a></p>
+
+
+<script>
+    document.getElementById("submitRegisterBtn").addEventListener("click", async () => {
+        const name = document.getElementById("nameInput").value;
+        const email = document.getElementById("emailInput").value;
+        const password = document.getElementById("passwordInput").value;
+        const registerDto = {
+            name: name,
+            email: email,
+            password: password
+        };
+
+        const response = await fetch("/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(registerDto)
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+
+            localStorage.setItem("jwtToken", data.token);
+            localStorage.setItem("userName", name);
+            window.location.href = "/";
+        } else {
+            const errorText = await response.text();
+            alert("Registration Failed: " + errorText);
+        }
+    });
+</script>

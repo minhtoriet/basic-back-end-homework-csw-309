@@ -1,11 +1,16 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
+using System.Security.Claims;
+using WebApplication1.Models;
 using WebApplication1.Models.Context;
 using WebApplication1.Service;
+using WebApplication1.Services;
 
 namespace WebApplication1.Hub
 {
+    [Authorize]
     public class ChatHub : Microsoft.AspNetCore.SignalR.Hub
     {
         private readonly ChatDBContext _context;
@@ -16,11 +21,32 @@ namespace WebApplication1.Hub
             _service = service;
         }
 
-        //broadcast
-        public async Task SendMessage(string user, string message)
+        public override async Task OnConnectedAsync()
         {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
-            await _service.SaveMessageAsync(user, message, 0, null, null);
+            string username = Context.User.FindFirst(ClaimTypes.Name)?.Value ?? "Unknown";
+
+            // Map/Update the user's active connection string
+            OnlineUserTracker.OnlineUsers[username] = Context.ConnectionId;
+
+            await base.OnConnectedAsync();
+        }
+
+        public override async Task OnDisconnectedAsync(Exception? exception)
+        {
+            string username = Context.User.FindFirst(ClaimTypes.Name)?.Value ?? "Unknown";
+
+            // Remove them from the active list
+            OnlineUserTracker.OnlineUsers.TryRemove(username, out _);
+
+            await base.OnDisconnectedAsync(exception);
+        }
+        //broadcast
+        public async Task SendMessage(string message)
+        {
+            string senderName = Context.User.FindFirst(ClaimTypes.Name)?.Value ?? "Unknown Sender";
+            int senderId = int.Parse(Context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+            await Clients.All.SendAsync("ReceiveMessage", senderName, message);
+            await _service.SaveMessageAsync(senderName, senderId, message, 0, null, null);
         }
         // group chat
         public async Task JoinRoom(string roomName)
@@ -31,16 +57,21 @@ namespace WebApplication1.Hub
         {
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomName);
         }
-        public async Task SendGroupMessage(string roomName, string user, string message)
+        public async Task SendGroupMessage(string roomName, string message)
         {
-            await Clients.Group(roomName).SendAsync("ReceiveGroupMessage", user, message, roomName);
-            await _service.SaveMessageAsync(user, message, 1, roomName, null);
+            string senderName = Context.User.FindFirst(ClaimTypes.Name)?.Value ?? "Unknown Sender";
+            int senderId = int.Parse(Context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+            await Clients.Group(roomName).SendAsync("ReceiveGroupMessage", senderName, message, roomName);
+            await _service.SaveMessageAsync(senderName, senderId, message, 1, roomName, null);
         }
         //private chat
-        public async Task SendPrivateMessage(string receiverConnectionId, string user, string message, string receiverName)
+        public async Task SendPrivateMessage(string receiverConnectionId, string message, string receiverName)
         {
-            await Clients.Client(receiverConnectionId).SendAsync("ReceivePrivateMessage", user, message);
-            await _service.SaveMessageAsync(user, message, 2, null, receiverName);
+            string senderName = Context.User.FindFirst(ClaimTypes.Name)?.Value ?? "Unknown Sender";
+            int senderId = int.Parse(Context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+            await Clients.Client(receiverConnectionId).SendAsync("ReceivePrivateMessage", senderName, message);
+            await Clients.Caller.SendAsync("ReceivePrivateMessage", senderName, message);
+            await _service.SaveMessageAsync(senderName, senderId, message, 2, null, receiverName);
         }
     }
 }

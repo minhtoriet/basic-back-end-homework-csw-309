@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Group Chat Rooms";
+}
+
+<script>
+    if (!localStorage.getItem("jwtToken")) {
+        window.location.href = "/";
+    }
+</script>
+
+<div>
+    <div>
+        <h3>Chat Rooms</h3>
+        <ul id="roomsList" style="width : 15%">
+        </ul>
+    </div>
+
+    <div>
+        <h3>Active Room: <span id="activeRoomName">None (Select a room)</span></h3>
+        <div id="groupMessages"></div>
+        <div>
+            <input id="groupMessageInput" placeholder="Type a message..." disabled />
+            <button id="sendGroupBtn" disabled>Send</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/9.0.6/signalr.min.js"></script>
+
+<script>
+    let currentRoom = null;
+    const token = localStorage.getItem("jwtToken");
+    const username = localStorage.getItem("userName") || "Anonymous";
+
+    // 1. Initialize SignalR Hub Connection
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl(`/chathub?access-token=${encodeURIComponent(token)}`)
+        .build();
+
+    // 2. Handle Incoming Group Messages Listener
+    connection.on("ReceiveGroupMessage", (user, message, roomName) => {
+        // Only append the message visually if it belongs to the room the user is currently viewing
+        if (roomName === currentRoom) {
+            const container = document.getElementById("groupMessages");
+            container.innerHTML += `<p>${user}: ${message}</p>`;
+            container.scrollTop = container.scrollHeight; // Auto-scroll to bottom
+        }
+    });
+
+    connection.start()
+        .then(() => {
+            console.log("Connected to group chat hub!");
+            loadRooms(); // Fetch rooms from the API after connection establishes
+        })
+        .catch(err => console.error("SignalR Connection Error: ", err));
+
+    // 3. Fetch Rooms list and render it to the Sidebar
+    async function loadRooms() {
+        const response = await fetch("/api/rooms");
+        if (response.ok) {
+            const rooms = await response.json();
+            const roomsListUi = document.getElementById("roomsList");
+            roomsListUi.innerHTML = ""; // Clear existing
+
+            rooms.forEach(room => {
+                const li = document.createElement("li");
+                li.innerText = `# ${room}`;
+                li.style.cssText = "padding: 10px; margin-bottom: 5px; background: #fff; border: 1px solid #ddd; cursor: pointer; border-radius: 4px;";
+
+                // Add click behavior to switch rooms
+                li.addEventListener("click", () => switchRoom(room));
+                roomsListUi.appendChild(li);
+            });
+        }
+    }
+
+    // 4. Client Join/Leave Logic Workflow
+    async function switchRoom(newRoomName) {
+        if (currentRoom === newRoomName) return; // Already here
+
+        // A. If already in a room, execute the LeaveRoom request
+        if (currentRoom) {
+            await connection.invoke("LeaveRoom", currentRoom);
+        }
+
+        // B. Clear out the previous room's text history feed
+        document.getElementById("groupMessages").innerHTML = "";
+
+        // C. Update tracking variables and header UI element
+        currentRoom = newRoomName;
+        document.getElementById("activeRoomName").innerText = `# ${newRoomName}`;
+
+        // D. Execute the JoinRoom request to update server registration
+        await connection.invoke("JoinRoom", currentRoom);
+
+        // E. Enable inputs now that room context is established
+        document.getElementById("groupMessageInput").disabled = false;
+        document.getElementById("sendGroupBtn").disabled = false;
+    }
+
+    // 5. Handle Send Action Event Trigger
+    document.getElementById("sendGroupBtn").addEventListener("click", () => {
+        const inputElement = document.getElementById("groupMessageInput");
+        const messageText = inputElement.value;
+
+        if (messageText && currentRoom) {
+            // Invokes SendGroupMessage(string roomName, string user, string message) exactly as required
+            connection.invoke("SendGroupMessage", currentRoom, messageText)
+                .then(() => {
+                    inputElement.value = ""; // Clear input field
+                })
+                .catch(err => console.error("Error sending group message:", err));
+        }
+    });
+</script>

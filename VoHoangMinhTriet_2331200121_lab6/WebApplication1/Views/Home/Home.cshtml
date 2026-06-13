@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+<h2>Welcome to Live Chattin</h2>
+
+
+<div id="guest" style="">
+    <p>ur not logged in</p>
+    <a href="/login">Log in</a>
+    <br />
+    <a href="/register">Sign in</a>
+</div>
+<br /><br />
+<div id="authenticated" class="hidden">
+    <a href="/chat">click here to chat</a>
+    <br/>
+    <a href="/groupchat">group chat</a>
+    <br />
+    <a href="/privatechat">private chat</a>
+    <br />
+    <a id="logoutBtn" href="#">Log Out</a>
+</div>
+<script>
+    if (localStorage.getItem("jwtToken")) {
+        document.getElementById("guest").style.display = "none";
+        document.getElementById("authenticated").style.display = "block";
+    }
+    //document.getElementById("authenticated").style.display = "none";
+    document.getElementById("logoutBtn").addEventListener('click', () =>{
+        localStorage.removeItem('jwtToken');
+        window.location.href = '/'
+    });
+</script>

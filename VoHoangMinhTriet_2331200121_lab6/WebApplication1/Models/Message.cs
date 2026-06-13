@@ -10,7 +10,7 @@ namespace WebApplication1.Models
         public int Id { get; set; }
         public int SenderId { get; set; }
         public int? ReceiverId { get; set; }
-        public string RoomName { get; set; }
+        public string? RoomName { get; set; }
         public string MessageBody { get; set; }
         public short MessageType { get; set; }
         public DateTime CreatedAt { get; set; }

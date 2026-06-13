@@ -13,7 +13,7 @@ namespace WebApplication1.Models.Context
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>().HasKey(u => u.Id);
             modelBuilder.Entity<User>().Property(u => u.Name).IsRequired().HasMaxLength(50);
-            modelBuilder.Entity<User>().Property(u => u.HashPassword).IsRequired().HasMaxLength(70);
+            modelBuilder.Entity<User>().Property(u => u.HashedPassword).IsRequired().HasMaxLength(70);
             modelBuilder.Entity<User>().Property(u => u.Email).IsRequired().HasMaxLength(120);
             modelBuilder.Entity<User>().Property(u => u.IsActive).IsRequired();
 

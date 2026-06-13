@@ -1,0 +1,35 @@
+@{
+    ViewData["Title"] = "Realtime Chat";
+}
+<h2>Broadcast Chat</h2>
+@* <input id="userInput" placeholder="Your Name"/> *@
+<input id="messageInput" placeholder="Message"/>
+<button id="sendBtn">Send</button>
+
+<div id="messages"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/9.0.6/signalr.min.js" integrity="sha512-kkMt8UThSmWcdXLYFaGZ/U6vyWSNLZMUWQ5SMeF80pGqrEkH5ei9D/3MbVQpB8p7D5C3A4vlX7BpsWTT2BfB6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    const token = localStorage.getItem("jwtToken");
+    if (!token) window.location.href = "/";
+
+    const connection = new signalR.HubConnectionBuilder()
+    .withUrl(`/chathub?access-token=${encodeURIComponent(token)}`)
+    .build();
+
+    connection.on("ReceiveMessage", (user, message) => {
+        const msg = `${user}: ${message}`;
+        document.getElementById("messages").innerHTML += msg + "<br>";
+    });
+
+    connection.start().catch(Error => console.error(Error));
+
+    document.getElementById("sendBtn").addEventListener("click", () => {
+        //const user = document.getElementById("userInput").value;
+        const message = document.getElementById("messageInput").value;
+        if (message && connection) {
+            connection.invoke("SendMessage", message)
+            .then(() => { messageElement.value = ""; })
+            .catch(err => console.error(err));
+        }
+    });
+</script>

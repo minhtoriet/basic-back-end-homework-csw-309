@@ -6,33 +6,34 @@ namespace WebApplication1.Service;
 internal class MessageService : IMessageService
 {
     private readonly IMessageRepository _repository;
+    private readonly IUserRepository _userRepo;
 
-    public MessageService(IMessageRepository repository)
+    public MessageService(IMessageRepository repository, IUserRepository userRepo)
     {
         _repository = repository;
+        _userRepo = userRepo;
     }
 
-    public async Task SaveMessageAsync(string senderName, string messageBody, int messageType,
+    public async Task SaveMessageAsync(string senderName,int senderId, string messageBody, int messageType,
         string? roomName, string? receiverName)
     {
-        var sender = await _repository.GetUserByNameAsync(senderName);
-        if (sender == null) throw new Exception("user not found");
-
+        
         int receiverId = 0;
+
+        // receiverName was sent as fooking email. Speechless.
         if (messageType == 2 && !string.IsNullOrEmpty(receiverName))
         {
-            var receiver = await _repository.GetUserByNameAsync(receiverName);
+            var receiver = await _userRepo.GetUserByEmailAsync(receiverName);
             if (receiver == null)
             {
                 throw new Exception("receiver name not found");
-                return;
             }
             receiverId = receiver.Id;
         }
         
         var message = new Message
         {
-            SenderId = sender.Id,
+            SenderId = senderId,
             ReceiverId = receiverId == 0 ? null : receiverId,
             MessageType = (short)messageType,
             MessageBody = messageBody,
